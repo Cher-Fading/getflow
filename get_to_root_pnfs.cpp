@@ -30,12 +30,12 @@ void get_to_root_pnfs(const char *dataType = "")
                 fileName = item.substr(start_pos + 1, item.length() - start_pos - 1);
                 //cout << fileName << endl;
 
-                if (fileName.find(".root") == std::string::npos)
+                if (fileName.find(".root.1") == std::string::npos)
                 {
                     cout << fileName << "file missing" << endl;
                     return;
                 }
-                if (fileName.find("user.xiaoning") == std::string::npos)
+                if (fileName.find(dataType.c_str()) == std::string::npos)
                 {
                     cout << fileName << "file missing" << endl;
                     break;
