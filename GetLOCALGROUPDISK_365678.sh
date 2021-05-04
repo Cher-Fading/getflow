@@ -1,0 +1,1 @@
+rucio list-file-replicas --expression BNL-OSG2_LOCALGROUPDISK data18_hi.00$1.calibration_PCPEB.merge.AOD.k1029_m2048 > ~/GetStuff/$1_pnfs.txt
