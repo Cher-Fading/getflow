@@ -3,49 +3,51 @@
 
 void get_to_root_pnfs(const char *dataType = "")
 {
-    std::ifstream file(Form("../GetStuff/%s_pnfs.txt", dataType));
+    std::ifstream file(Form("%s_pnfs.txt", dataType));
     std::string line;
-    std::ofstream outfile(Form("../GetStuff/%s_root_pnfs.txt", dataType));
+    std::ofstream outfile(Form("%s_root_pnfs.txt", dataType));
     int nl = 0;
     while (std::getline(file, line))
     {
+      //cout << line << endl;
         std::stringstream linestream(line);
         std::string item;
-        int linePos = 0;
+        int linePos = -1;
         std::string fileName;
         while (std::getline(linestream, item, '|'))
         {
 
-            //	  std::cout <<  item << " linePos " << linePos << endl;
-            if (linePos == 5)
-            {
-                if (item.find("REPLICA") != std::string::npos)
-                    continue;
+            	  //std::cout <<  item << " linePos " << linePos << endl;
+	  ++linePos;
+		 if (linePos!=5) continue;
+            if (linePos == 5 && item.find("BNL-OSG2_LOCALGROUPDISK") == std::string::npos) continue;
                 std::string::iterator end_pos = std::remove(item.begin(), item.end(), ' ');
                 item.erase(end_pos, item.end());
                 //cout << end_pos << endl;
                 //cout << item << endl;
-                int start_pos = item.find_last_of("=");
+                int start_pos = item.rfind("/pnfs/");
+//cout << item.length() << endl;
                 //cout << start_pos << endl;
-                fileName = item.substr(start_pos + 1, item.length() - start_pos - 1);
+//cout << item.substr(start_pos,6)<< endl;
+                fileName = item.substr(start_pos, item.length() - start_pos);
                 //cout << fileName << endl;
-
-                if (fileName.find(".root.1") == std::string::npos)
+//return;
+                if (fileName.find(".root") == std::string::npos)
                 {
                     cout << fileName << "file missing" << endl;
                     return;
                 }
-                if (fileName.find(dataType.c_str()) == std::string::npos)
+                if (fileName.find("AOD") == std::string::npos)
                 {
                     cout << fileName << "file missing" << endl;
                     break;
                 }
                 //cout << fileName << endl;
                 outfile << fileName << endl;
-            }
-            ++linePos;
+		++nl;
+
         }
-	++nl;
+
     }
     file.close();
     outfile.close();
