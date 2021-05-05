@@ -1,1 +1,2 @@
-rucio list-file-replicas --expression BNL-OSG2_LOCALGROUPDISK data18_hi.00$1.calibration_PCPEB.merge.AOD.k1029_m2048 > $1_pnfs.txt
+rucio list-file-replicas --expression BNL-OSG2_LOCALGROUPDISK data18_hi.00$1.calibration_PCPEB.merge.AOD.k1029_m2048 > $1_PC_pnfs.txt
+rucio list-file-replicas --expression BNL-OSG2_LOCALGROUPDISK data18_hi.00$1.calibration_CCPEB.merge.AOD.k1029_m2048 >> $1_CC_pnfs.txt
