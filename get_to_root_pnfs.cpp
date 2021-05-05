@@ -1,11 +1,11 @@
 #include <istream>
 #include <ostream>
 
-void get_to_root_pnfs(const char *dataType = "")
+void get_to_root_pnfs(const char *dataType = "",const char *centrality = "PC")
 {
-    std::ifstream file(Form("%s_pnfs.txt", dataType));
+    std::ifstream file(Form("%s_%s_pnfs.txt", dataType,centrality));
     std::string line;
-    std::ofstream outfile(Form("%s_root_pnfs.txt", dataType));
+    std::ofstream outfile(Form("%s_%s_root_pnfs.txt", dataType,centrality));
     int nl = 0;
     while (std::getline(file, line))
     {
