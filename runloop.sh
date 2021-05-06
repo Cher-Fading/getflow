@@ -19,7 +19,7 @@ while IFS= read -r line; do
 		cp /usatlas/u/cher97/flow/source/MyAnalysis/share/ATestRun_eljob.py /usatlas/scratch/cher97/tempin$3_$4_$linenumber/
 		chmod +x /usatlas/scratch/cher97/tempin$3_$4_$linenumber/ATestRun_eljob.py
 		sed -i "s@^inputFilePath = .*@inputFilePath = '/usatlas/scratch/cher97/tempin$3_$4_$linenumber'@" /usatlas/scratch/cher97/tempin$3_$4_$linenumber/ATestRun_eljob.py
-    	sed -i "s@^ROOT.SH.ScanDir().filePattern(.*@ROOT.SH.ScanDir().filePattern( '$filename').scan( sh, inputFilePath )@" /usatlas/scratch/cher97/tempin$3_$4_$linenumber/ATestRun_eljob.py
+    		sed -i "s@^ROOT.SH.ScanDir().filePattern(.*@ROOT.SH.ScanDir().filePattern( '$filename').scan( sh, inputFilePath )@" /usatlas/scratch/cher97/tempin$3_$4_$linenumber/ATestRun_eljob.py
 		cd /usatlas/scratch/cher97/tempin$3_$4_$linenumber/
 		rm -rf submitDir
 		./ATestRun_eljob.py --submission-dir=submitDir
