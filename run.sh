@@ -8,13 +8,17 @@ input="~/getflow/$1_runlist.txt"
 
 linenumber=0
 while IFS= read -r line; do
-	cp ~/getflow/run_temp.job ~/getflow/run_PC$line.job
-	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $line PC \$(Process)'@" ~/getflow/run_PC$line.job
-	condor_submit run_PC$line.job
+    b=${line#*data18_hi.00}
+    c=${b%%.*}
+    d=${line#*AOD.}
+    ~/getflow/GetLOCALGROUPDISK_single.sh $c $d
+	cp ~/getflow/run_temp.job ~/getflow/run_PC$c.job
+	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c PC \$(Process)'@" ~/getflow/run_PC$c.job
+	condor_submit run_PC$c.job
     
-#	cp ~/getflow/run_temp.job ~/getflow/run_CC$line.job
-#	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $line CC \$(Process)'@" ~/getflow/run_CC$line.job
-#	condor_submit run_CC$line.job
+	cp ~/getflow/run_temp.job ~/getflow/run_CC$c.job
+	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c CC \$(Process)'@" ~/getflow/run_CC$c.job
+	condor_submit run_CC$c.job
 
 	linenumber=$((linenumber + 1))
 done <"$input"
