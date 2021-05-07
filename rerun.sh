@@ -1,34 +1,23 @@
 #!/bin/bash
 
+cd /usatlas/scratch/cher97/
+ls $1_pnfs_$2_$3 >~/getflow/$1_pnfs_$2_$3_stat.txt
 
-
-input=~/getflow/$1_runlist.txt
+input=~/getflow/$1_pnfs_$2_$3_stat.txt
 #cat ~/getflow/$1_runlist.txt
-
-
 
 linenumber=0
 while IFS= read -r line; do
-	b=${line#*data18_hi.00}
-	c=${b%%.*}
-	d=${line#*AOD.}
-	~/getflow/GetLOCALGROUPDISK_single.sh $c $d
-	mkdir -p /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$d_PC/
-	mkdir -p /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$d_CC/
-
-	cp ~/getflow/run_temp.job ~/getflow/run_PC$c.job
-	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c PC \$(Process)@" ~/getflow/run_PC$c.job
-	nof=$(wc -l < ~/getflow/$c\_PC_root_pnfs.txt)
-	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/run_PC$c.job
-	#cat run_PC$c.job
-	condor_submit run_PC$c.job
-    
-#	cp ~/getflow/run_temp.job ~/getflow/run_CC$c.job#
-#	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c CC \$(Process)@" ~/getflow/run_CC$c.job
-#	nof=$(wc -l < ~/getflow/$c\_CC_root_pnfs.txt)
-#	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/run_CC$c.job
-	#cat run_CC$c.job
-#	condor_submit run_CC$c.job
-
+	b=${line#*'usatlas '}
+	c=${b%%' '$4*}
+	echo $c
+	if [ "$c" == "0" ]; then
+		$linenumber >>~/getflow/$1_pnfs_$2_$3_rerun.txt
+	fi
 	linenumber=$((linenumber + 1))
 done <$input
+
+cp ~/getflow/run_$3$2.job ~/getflow/rerun_$3$2.job
+sed -i "s@^Queue.*@Queue $linenumber'@" ~/getflow/rerun_$3$2.job
+sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/rerunloop.sh'@" ~/getflow/rerun_$3$2.job
+condor_submit rerun_$3$2.job
