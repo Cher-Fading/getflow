@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 input=~/getflow/$1_runlist.txt
 #cat ~/getflow/$1_runlist.txt
 
