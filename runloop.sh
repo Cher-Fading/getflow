@@ -25,7 +25,7 @@ while IFS= read -r line; do
     		sed -i "s@^ROOT.SH.ScanDir().filePattern(.*@ROOT.SH.ScanDir().filePattern( '$filename').scan( sh, inputFilePath )@" $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
 		./ATestRun_eljob.py --submission-dir=submitDir
 		#echo 'gsiftp://dcgftp.usatlas.bnl.gov:2811//pnfs/usatlas.bnl.gov/users/cher97/'$1$2_$3_$4/
-		mv $tempdir/'tempout'$3_$4$linenumber'/submitDir/data-myOutput/'*'.root' '/usatlas/scratch/cher97/'$1$2_$3_$4'/tempin'$3_$4_$linenumber'.root'
+		mv $tempdir/'tempout'$3_$4$linenumber'/submitDir/data-myOutput/*.root' '/usatlas/scratch/cher97/'$1$2_$3_$4'/tempin'$3_$4_$linenumber'.root'
 		#xrdcp '/usatlas/scratch/cher97/'$1$2_$3_$4'/tempin'$3_$4_$linenumber'.root' 'gsiftp://dcgftp.usatlas.bnl.gov:2811//pnfs/usatlas.bnl.gov/users/cher97/'$1$2_$3_$4'/' 
 #echo `ls $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/`
       		sleep 2
