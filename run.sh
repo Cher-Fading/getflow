@@ -21,12 +21,12 @@ while IFS= read -r line; do
 	#cat run_PC$c.job
 	condor_submit run_PC$c.job
     
-#	cp ~/getflow/run_temp.job ~/getflow/run_CC$c.job#
-#	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c CC \$(Process)@" ~/getflow/run_CC$c.job
-#	nof=$(wc -l < ~/getflow/$c\_CC_root_pnfs.txt)
-#	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/run_CC$c.job
+	cp ~/getflow/run_temp.job ~/getflow/run_CC$c.job#
+	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c CC \$(Process)@" ~/getflow/run_CC$c.job
+	nof=$(wc -l < ~/getflow/$c\_CC_root_pnfs.txt)
+	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/run_CC$c.job
 	#cat run_CC$c.job
-#	condor_submit run_CC$c.job
+	condor_submit run_CC$c.job
 
 	linenumber=$((linenumber + 1))
 done <$input
