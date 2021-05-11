@@ -12,7 +12,7 @@ while IFS= read -r line; do
 	d=${line#*AOD.}
 	ls '/pnfs/usatlas.bnl.gov/users/cher97/'$1'_pnfs_'$c'_PC/tempin'$c'_PC_*.root' > '~/getflow/'$1'_pnfs_'$c'_PC_rootlist.txt'
 	cp ~/getflow/run_temp.job ~/getflow/runcalq_PC$c.job
-    sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runcalqloop.sh@"
+    sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runcalqloop.sh@" ~/getflow/runcalq_PC$c.job
 	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c PC \$(Process) $2 $3@" ~/getflow/runcalq_PC$c.job
 	nof=$(wc -l < '~/getflow/'$1'_pnfs_'$c'_PC_rootlist.txt')
 	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/runcalq_PC$c.job
@@ -21,7 +21,7 @@ while IFS= read -r line; do
     
     ls '/pnfs/usatlas.bnl.gov/users/cher97/'$1'_pnfs_'$c'_PC/tempin'$c'_PC_*.root' > '~/getflow/'$1'_pnfs_'$c'_CC_rootlist.txt'
 	cp ~/getflow/run_temp.job ~/getflow/runcalq_CC$c.job
-    sed -i "s@^Executable.*Executable   = /usatlas/u/cher97/getflow/runcalqloop.sh"
+    sed -i "s@^Executable.*Executable   = /usatlas/u/cher97/getflow/runcalqloop.sh" ~/getflow/runcalq_CC$c.job
 	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c CC \$(Process) $2 $3@" ~/getflow/runcalq_CC$c.job
 	nof=$(wc -l < '~/getflow/'$1'_pnfs_'$c'_CC_rootlist.txt')
 	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/runcalq_CC$c.job
