@@ -6,7 +6,7 @@ Universe        = vanilla
 Notification    = Never
 
 # The executable we want to run.
-Executable   = /usatlas/u/cher97/getflow/runloop.sh
+Executable   = /usatlas/u/cher97/getflow/runcalqloop.sh
 
 # The argument to pass to the executable.
 ## first argument  - process number
@@ -76,4 +76,4 @@ accounting_group = group_atlas.uillu
 # job.  If a number is placed after the command (i.e. Queue 15)
 # then the job will be submitted N times.  Use the $(Process)
 # macro to make your input/output and log files unique.
-Queue 
+Queue 367

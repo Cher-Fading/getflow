@@ -1,0 +1,2 @@
+# clist file for access within BNL
+#site=Private dCache; input args= ['/pnfs/usatlas.bnl.gov/users/cher97/Flow210505.1_pnfs_/tempin*.root']
