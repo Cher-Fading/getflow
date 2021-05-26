@@ -12,7 +12,9 @@ while IFS= read -r line; do
 	d=${line#*AOD.}
 	~/getflow/GetLOCALGROUPDISK_single.sh $c $d
 	mkdir -p /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$d_PC/
+	chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$d_PC/
 	mkdir -p /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$d_CC/
+	chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$d_CC/
 
 	cp ~/getflow/run_temp.job ~/getflow/run_PC$c.job
 	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c PC \$(Process)@" ~/getflow/run_PC$c.job
