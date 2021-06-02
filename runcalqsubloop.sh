@@ -20,7 +20,7 @@ for ((i = 1; i <= $8; i++)); do
 		filename=$(ls *.root*)
 		mkdir $tempdir/'tempout'$3_$4$linenumber
 		cd ~/calq
-		root -b -q -l 'calq_diff_subsample.cpp("'$tempdir/tempin$3_$4$linenumber/$filename'","'$tempdir/'tempout'$3_$4$linenumber'",'$7','$8','$i')'
+		root -b -q -l 'calq_diff_subsample.C("'$tempdir/tempin$3_$4$linenumber/$filename'","'$tempdir/'tempout'$3_$4$linenumber'",'$7','$8','$i')'
 		#xrdcp $tempdir/tempout$3_$4$linenumber/*.root root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/users/cher97/$1$2_$3_$4_calq_subdiff$6_v$7/${filename%%.*}_calq_$8_$i.root
 		cp $tempdir/tempout$3_$4$linenumber/*.root /atlasgpfs01/usatlas/data/cher97/$1$2_$3_$4_calq_subdiff$6_v$7/${filename%%.*}_calq_$8_$i.root
 		echo ${filename%%.*}_calq_$8_$i
