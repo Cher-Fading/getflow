@@ -16,7 +16,7 @@ Executable   = /usatlas/u/cher97/getflow/runloop.sh
 ## fitth argument - PbPb or not
 ## sixth argument - PbPb string
 ## seventh argument - pnfs or not
-Arguments       = Flow210511.1 _pnfs 365678 PC $(Process)
+Arguments       = Flow210602.1 _pnfs 365678 PC $(Process)
 
 # The requirement line specifies which machines we want to
 # run this job on.  Any arbitrary classad expression can
