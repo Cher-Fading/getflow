@@ -1,0 +1,79 @@
+# All local jobs are part of the vanilla universe.
+Universe        = vanilla
+
+# We want email if the job completed successfully. This can
+# be set to Always, Error, or Never.
+Notification    = Never
+
+# The executable we want to run.
+Executable   = /usatlas/u/cher97/getflow/runcalqdiffsubloop.sh
+
+# The argument to pass to the executable.
+## first argument  - process number
+## second argument - datatype
+## third argument - pT limit 
+## fourth argument - track pT limit
+## fitth argument - PbPb or not
+## sixth argument - PbPb string
+## seventh argument - pnfs or not
+Arguments       = Flow210511.1 _pnfs 365678 CC $(Process) Calq210526.1 2 40 27
+
+# The requirement line specifies which machines we want to
+# run this job on.  Any arbitrary classad expression can
+# be used.
+Requirements    = CPU_Speed >= 1
+
+# Rank is an expression that states how to rank machines which 
+# have already met the requirements expression.  Essentially, 
+# rank expresses preference.  A higher numeric value equals better 
+# rank.  Condor will give the job the machine with the highest rank.
+Rank		= CPU_Speed
+
+# This tells Condor the maximum virtual image size to which
+# you believe your program will grow during its execution.
+###Image_Size      = 428 Meg
+
+# Jobs with higher numerical priority will run before jobs 
+# with lower numerical priority (-20 to 20).
+#Priority        = +20
+
+
+#Chris would hate me for this
+GetEnv          = True
+
+# Used to give jobs a directory with respect to file input 
+# and output.
+Initialdir   = /usatlas/u/cher97/GetStuff
+
+# Input file given to the job.
+Input           = /dev/null
+
+# The job's stdout is sent to this file.
+Output       = /usatlas/u/cher97/logFiles/out.$(Process)
+
+# The job's stderr is sent to this file.
+Error      = /usatlas/u/cher97/logFiles/err.$(Process)
+
+# The condor log file for this job, useful when debugging.
+Log       =  /usatlas/u/cher97/logFiles/log.$(Process)
+
+# add hold to resolve eviction problems
+#PeriodicHold = (NumJobStarts>=1 && JobStatus == 1)
+
+# require phenix hardware
+#Requirements    = (CPU_Speed >= 1)
+
+# These are job flags which are non-Condor specific.
+# The "Experiment" flag should be set to the user's experiment:
+# star, phobos, phenix, brahms, atlas, etc.
+
+# Since this is an analysis job we set this to "cas".
+#+Job_Type       = "cas"
+
+accounting_group = group_atlas.uillu
+
+# This should be the last command and tells condor to queue the
+# job.  If a number is placed after the command (i.e. Queue 15)
+# then the job will be submitted N times.  Use the $(Process)
+# macro to make your input/output and log files unique.
+Queue 367

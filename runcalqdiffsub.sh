@@ -18,9 +18,9 @@ while IFS= read -r line; do
 		nof=$(($(wc -l <~/getflow/$1_pnfs_$c'_PC_rootlist.txt') - 2))
 		sed -i "s@^Queue.*@Queue $nof@" ~/getflow/runcalq_PC$c$i.job
 		#cat runcalq_PC$c.job
-		rm -rf /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
-		mkdir /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
-		chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
+		#rm -rf /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
+		mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
+		chmod +777 /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
 		condor_submit runcalq_PC$c$i.job
 
 		cd ~/getflow
@@ -33,9 +33,9 @@ while IFS= read -r line; do
 		sed -i "s@^Queue.*@Queue $nof@" ~/getflow/runcalq_CC$c$i.job
 		#cat runcalq_CC$c.job
 
-		rm -rf /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
-		mkdir /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
-		chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
+		#rm -rf /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
+		mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
+		chmod +777 /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
 		condor_submit runcalq_CC$c$i.job
 	done
 	linenumber=$((linenumber + 1))
