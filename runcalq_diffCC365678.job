@@ -16,7 +16,7 @@ Executable   = /usatlas/u/cher97/getflow/runcalq_diffloop.sh
 ## fitth argument - PbPb or not
 ## sixth argument - PbPb string
 ## seventh argument - pnfs or not
-Arguments       = Flow210511.1 _pnfs 365678 CC $(Process) Calq210611.1 2
+Arguments       = Flow210602.1 _pnfs 365678 CC $(Process) Calq210623.1 4
 
 # The requirement line specifies which machines we want to
 # run this job on.  Any arbitrary classad expression can

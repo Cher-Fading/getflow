@@ -6,7 +6,7 @@ Universe        = vanilla
 Notification    = Never
 
 # The executable we want to run.
-Executable   = /usatlas/u/cher97/getflow/runcalq_diffloop.sh
+Executable   = /usatlas/u/cher97/getflow/runcalqdiffsubloop.sh
 
 # The argument to pass to the executable.
 ## first argument  - process number
@@ -16,7 +16,7 @@ Executable   = /usatlas/u/cher97/getflow/runcalq_diffloop.sh
 ## fitth argument - PbPb or not
 ## sixth argument - PbPb string
 ## seventh argument - pnfs or not
-Arguments       = Flow210602.1 _pnfs 365678 PC $(Process) Calq210623.1 4
+Arguments       = Flow210602.1 _pnfs 365678 CC $(Process) Calq210526.1 2 40 31
 
 # The requirement line specifies which machines we want to
 # run this job on.  Any arbitrary classad expression can
@@ -76,4 +76,4 @@ accounting_group = group_atlas.uillu
 # job.  If a number is placed after the command (i.e. Queue 15)
 # then the job will be submitted N times.  Use the $(Process)
 # macro to make your input/output and log files unique.
-Queue 66
+Queue 367
