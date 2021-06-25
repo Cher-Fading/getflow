@@ -8,16 +8,16 @@ while IFS= read -r line; do
 	b=${line#*data18_hi.00}
 	c=${b%%.*}
 	d=${line#*AOD.}
-cd ~/getflow
-		#python pnfs_ls.py -l -o ~/getflow/$1_pnfs_$c'_PC_rootlist.txt' /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC/tempin'$c'_PC_*.root'
-		#python pnfs_ls.py -l -o ~/getflow/$1_pnfs_$c'_CC_rootlist.txt' /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC/tempin'$c'_CC_*.root'
-chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC'
-		mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
-		chmod +777 /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
-		chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC'
-		mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
-		chmod +777 /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
-	for ((i = 1; i<=$4; i++)); do
+	cd ~/getflow
+	#python pnfs_ls.py -l -o ~/getflow/$1_pnfs_$c'_PC_rootlist.txt' /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC/tempin'$c'_PC_*.root'
+	#python pnfs_ls.py -l -o ~/getflow/$1_pnfs_$c'_CC_rootlist.txt' /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC/tempin'$c'_CC_*.root'
+	chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC'
+	mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
+	chmod +777 /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_subdiff'$2_v$3
+	chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC'
+	mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
+	chmod +777 /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_subdiff'$2_v$3
+	for ((i = 1; i <= $4; i++)); do
 		cp ~/getflow/run_temp.job ~/getflow/$1$2runcalqdiffsub$4_PC$c$i.job
 		sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runcalqdiffsubloop.sh@" ~/getflow/$1$2runcalqdiffsub$4_PC$c$i.job
 		sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $c PC \$(Process) $2 $3 $4 $i@" ~/getflow/$1$2runcalqdiffsub$4_PC$c$i.job
