@@ -18,9 +18,9 @@ cd ~/getflow
 	nof=$(($(wc -l < ~/getflow/$1_pnfs_$c'_PC_rootlist.txt')-2))
 	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/runcalq_PC$c.job
 	#cat runcalq_PC$c.job
-rm -rf /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC_calq_'$2_v$3
-	mkdir /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC_calq_'$2_v$3
-chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC_calq_'$2_v$3
+rm -rf /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_'$2_v$3
+	mkdir /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_'$2_v$3
+chmod +777 /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_PC_calq_'$2_v$3
 	condor_submit runcalq_PC$c.job
     
 	cd ~/getflow
@@ -33,9 +33,9 @@ chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_PC_calq_'$2_v$3
 	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/runcalq_CC$c.job
 	#cat runcalq_CC$c.job
 	
-rm -rf /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC_calq_'$2_v$3
-mkdir /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC_calq_'$2_v$3
-chmod +777 /pnfs/usatlas.bnl.gov/users/cher97/$1_pnfs_$c'_CC_calq_'$2_v$3
+rm -rf /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_'$2_v$3
+mkdir /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_'$2_v$3
+chmod +777 /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$c'_CC_calq_'$2_v$3
 	condor_submit runcalq_CC$c.job
 
 	linenumber=$((linenumber + 1))

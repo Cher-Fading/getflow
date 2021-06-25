@@ -16,7 +16,7 @@ Executable   = /usatlas/u/cher97/getflow/runcalqloop.sh
 ## fitth argument - PbPb or not
 ## sixth argument - PbPb string
 ## seventh argument - pnfs or not
-Arguments       = Flow210511.1 _pnfs 365678 CC $(Process) Calq210518.1 2
+Arguments       = Flow210602.1 _pnfs 365678 CC $(Process) Calq210624.1 2
 
 # The requirement line specifies which machines we want to
 # run this job on.  Any arbitrary classad expression can
@@ -76,4 +76,4 @@ accounting_group = group_atlas.uillu
 # job.  If a number is placed after the command (i.e. Queue 15)
 # then the job will be submitted N times.  Use the $(Process)
 # macro to make your input/output and log files unique.
-Queue 367
+Queue 181
