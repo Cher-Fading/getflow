@@ -1,5 +1,5 @@
 #!/bin/bash
-#./runcalqdiffsub.sh Flow210602.1 Calq210505.1 2 20
+#./runcalqdiffsub.sh Flow210602.1 Calq210704.1 2 20
 input=~/getflow/$1_runlist.txt
 #cat ~/getflow/$1_runlist.txt
 
