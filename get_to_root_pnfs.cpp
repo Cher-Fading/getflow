@@ -3,9 +3,9 @@
 
 void get_to_root_pnfs(const char *dataType = "",const char *centrality = "PC")
 {
-    std::ifstream file(Form("%s_%s_pnfs.txt", dataType,centrality));
+    std::ifstream file(Form("txts/%s_%s_pnfs.txt", dataType,centrality));
     std::string line;
-    std::ofstream outfile(Form("%s_%s_root_pnfs.txt", dataType,centrality));
+    std::ofstream outfile(Form("txts/%s_%s_root_pnfs.txt", dataType,centrality));
     int nl = 0;
     while (std::getline(file, line))
     {
