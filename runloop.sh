@@ -30,7 +30,7 @@ while IFS= read -r line; do
 		#mv $tempdir/'tempout'$3_$4$linenumber'/submitDir/data-myOutput/*.root' '/usatlas/scratch/cher97/'$1$2_$3_$4'/tempin'$3_$4_$linenumber'.root'
 		#xrdcp $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/*.root root://dcgftp.usatlas.bnl.gov:1096//pnfs/usatlas.bnl.gov/users/cher97/$1$2_$3_$4/tempin$3_$4_$linenumber'.root'
 		#echo `ls $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/`
-		cp $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/*.root /atlasgpfs01/usatlas/data/cher97/$1$2_$3_$4/tempin$3_$4_$linenumber'.root'
+		#cp $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/*.root /atlasgpfs01/usatlas/data/cher97/$1$2_$3_$4/tempin$3_$4_$linenumber'.root'
 		sleep 2
 		rm -rf $tempdir/tempin$3_$4$linenumber
 		rm -rf $tempdir/tempout$3_$4$linenumber
