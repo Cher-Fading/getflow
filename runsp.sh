@@ -2,7 +2,7 @@
 
 input=~/getflow/txts/$1_runlist.txt
 #cat ~/getflow/$1_runlist.txt
-# ./runsp.sh Qmean210504.1 True 0.5
+# ./runsp.sh Qmean210916.1 True 0.5
 
 linenumber=0
 while IFS= read -r line; do
