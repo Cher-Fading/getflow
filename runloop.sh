@@ -27,7 +27,7 @@ while IFS= read -r line; do
 		sed -i "s@.*alg.jumpBar.*@alg.jumpBar = $7@" $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
 		echo $PWD
 		mkdir /usatlas/scratch/cher97/$1$2_$3_$4_$5_$6_$7/
-cp ATestRun_eljob.py /usatlas/scratch/cher97/$1$2_$3_$4_$5_$6_$7/
+		cp ATestRun_eljob.py /usatlas/scratch/cher97/$1$2_$3_$4_$5_$6_$7/
 		#./ATestRun_eljob.py --submission-dir=/usatlas/scratch/cher97/$1$2_$3_$4_$5_$6_$7/submitDir
 		#echo 'gsiftp://dcgftp.usatlas.bnl.gov:2811//pnfs/usatlas.bnl.gov/users/cher97/'$1$2_$3_$4/
 		#mv $tempdir/'tempout'$3_$4$linenumber'/submitDir/data-myOutput/*.root' '/usatlas/scratch/cher97/'$1$2_$3_$4'/tempin'$3_$4_$linenumber'.root'
