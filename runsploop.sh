@@ -29,7 +29,7 @@ while IFS= read -r line; do
 		sed -i "s@.*alg.jumpBar.*@alg.jumpBar = $7@" $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
 		#echo $PWD
 		$tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py --submission-dir=submitDir
-ls $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/*.root 
+		ls $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/*.root
 		cp $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/*.root /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$3_$4_qmean_$6_$7/qmean$3_$4_$linenumber'.root'
 		sleep 2
 		rm -rf $tempdir/tempin$3_$4$linenumber
