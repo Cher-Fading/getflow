@@ -20,7 +20,7 @@ while IFS= read -r line; do
 		echo $filename
 		mkdir $tempdir/'tempout'$3_$linenumber
 		cd $tempdir/'tempout'$3_$linenumber
-		cp /usatlas/u/cher97/flow/source/MyAnalysis/share/ATestRun_eljob.py $tempdir/'tempout'$3_$linenumber/
+		cp /usatlas/u/cher97/mceff/source/MyAnalysis/share/ATestRun_eljob.py $tempdir/'tempout'$3_$linenumber/
 		chmod +x $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		sed -i "s@^inputFilePath = .*@inputFilePath = '$tempdir/tempin$3_$linenumber'@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		sed -i "s@^ROOT.SH.ScanDir().filePattern(.*@ROOT.SH.ScanDir().filePattern( '$filename').scan( sh, inputFilePath )@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
