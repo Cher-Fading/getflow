@@ -28,11 +28,12 @@ while IFS= read -r line; do
 		sed -i "s@.*alg.ProbLim.*@alg.ProbLim = $6@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		#echo $PWD
 		$tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py --submission-dir=submitDir
-		cp $tempdir/tempout$3_$linenumber/submitDir/data-myOutput/*.root /atlasgpfs01/usatlas/data/cher97/$1_$2_$3'_MCEff_'$5_$6/mce_$4_$linenumber'.root'
+		cp $tempdir/tempout$3_$linenumber/submitDir/data-myOutput/*.root /atlasgpfs01/usatlas/data/cher97/$1$2_$3'_MCEff_'$5_$6/mce_$4_$linenumber'.root'
+cp $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py /atlasgpfs01/usatlas/data/cher97/$1$2_$3'_MCEff_'$5_$6/mce_$4_$linenumber'ATestRun_eljob.py'
 		sleep 2
-		#rm -rf $tempdir/tempin$3_$linenumber
-		#rm -rf $tempdir/tempout$3_$linenumber
-		#rm -rf $tempdir
+		rm -rf $tempdir/tempin$3_$linenumber
+		rm -rf $tempdir/tempout$3_$linenumber
+		rm -rf $tempdir
 	fi
 	linenumber=$((linenumber + 1))
 done <$input

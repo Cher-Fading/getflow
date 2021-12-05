@@ -1,6 +1,6 @@
 #!/bin/bash
 #input="/atlasgpfs01/usatlas/data/cher97/mc16_5TeV.txt"
-# ./runsploop.sh Qmean210920.1 _pnfs 365678 PC 3 True 0.5
+# ./runspmloop.sh SPMethod211007.1 _pnfs 365678 PC 3 True
 
 input=~/getflow/txts/$3_$4_root$2.txt
 #input="mc16_5TeV_short.txt"
@@ -26,15 +26,15 @@ while IFS= read -r line; do
 		sed -i "s@^inputFilePath = .*@inputFilePath = '$tempdir/tempin$3_$4$linenumber'@" $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
 		sed -i "s@^ROOT.SH.ScanDir().filePattern(.*@ROOT.SH.ScanDir().filePattern( '$filename').scan( sh, inputFilePath )@" $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
 		sed -i "s@.*alg.recenter.*@alg.recenter = $6@" $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
-		sed -i "s@.*alg.overflow.*@alg.overflow = $7@" $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
+		#sed -i "s@.*alg.overflow.*@alg.overflow = $7@" $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
 		cat $tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py
 		$tempdir/'tempout'$3_$4$linenumber/ATestRun_eljob.py --submission-dir=submitDir
 		ls $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/*.root
 		cp $tempdir/tempout$3_$4$linenumber/submitDir/data-myOutput/*.root /atlasgpfs01/usatlas/data/cher97/$1_pnfs_$3_$4_spmethod_$6_$7/spmethod$3_$4_$linenumber'.root'
 		sleep 2
-		#rm -rf $tempdir/tempin$3_$4$linenumber
-		#rm -rf $tempdir/tempout$3_$4$linenumber
-		#rm -rf $tempdir
+		rm -rf $tempdir/tempin$3_$4$linenumber
+		rm -rf $tempdir/tempout$3_$4$linenumber
+		rm -rf $tempdir
 	fi
 	linenumber=$((linenumber + 1))
 done <$input

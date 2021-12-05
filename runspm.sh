@@ -2,7 +2,7 @@
 
 input=~/getflow/txts/$1_runlist.txt
 #cat ~/getflow/$1_runlist.txt
-# ./runspm.sh SPMethod211006.1 True True
+# ./runspm.sh SPMethod211006.1 True 
 
 linenumber=0
 while IFS= read -r line; do
