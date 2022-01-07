@@ -39,11 +39,11 @@ void get_to_root_pnfs(const char *dataType = "", const char *centrality = "PC", 
                 cout << fileName << "file missing" << endl;
                 return;
             }
-            if (fileName.find("AOD") == std::string::npos)
+            /*if (fileName.find("AOD") == std::string::npos)
             {
                 cout << fileName << "file missing" << endl;
                 break;
-            }
+            }*/
             //cout << fileName << endl;
             outfile << fileName << endl;
             ++nl;
