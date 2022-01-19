@@ -1,6 +1,8 @@
 #!/bin/bash
 #input="/atlasgpfs01/usatlas/data/cher97/mc16_5TeV.txt"
-# ./runmcloop.sh MCE211214.1 _pnfs 15_5TeV_e4962_a868_s2921_r9447 5 1.0 0.3 HITight False 313000
+# ./runmcloop.sh no1:(code version)MCE211214.1 no2:(localtion)_pnfs no3:(dataset)15_5TeV_e4962_a868_s2921_r9447 no4:(linenumber)5 no5:(etarange)1.0 no6:(matchprob)0.3 no7:(track cut)HITight no8:(doeff)False no9:($runnum)313000 no10:(ptcut)0.5 no10:(eta eff range)2.5 no11:(optional skip)0
+
+# ./runmcloop.sh MCE211214.1 _pnfs 15_5TeV_e4962_a868_s2921_r9447 5 1.0 0.3 HITight False 313000 0.5 0
 
 input=~/getflow/txts/$3_root$2.txt
 #input="mc16_5TeV_short.txt"
@@ -25,7 +27,8 @@ while IFS= read -r line; do
 		chmod +x $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		sed -i "s@^inputFilePath = .*@inputFilePath = '$tempdir/tempin$3_$linenumber'@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		sed -i "s@^ROOT.SH.ScanDir().filePattern(.*@ROOT.SH.ScanDir().filePattern( '$filename').scan( sh, inputFilePath )@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
-		sed -i "s@.*alg.RefEta.*@alg.RefEta = $5@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
+		sed -i "s@.*alg.RefEta.*@alg.RefEta = ${10}@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
+		sed -i "s@.*alg.EtaMatchRange.*@alg.EtaMatchRange = $5@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		sed -i "s@.*alg.ProbLim.*@alg.ProbLim = $6@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
                 sed -i "s@.*alg.CutLevel.*@alg.CutLevel = \"$7\"@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
                 sed -i "s@.*alg.Eff.*@alg.Eff = $8@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
