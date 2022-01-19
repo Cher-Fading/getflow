@@ -1,29 +1,35 @@
 #include <iostream>
 #include <fstream>
-void compare2lists(std::string file1 = "", std::string file2 = "")
+void compare2lists(std::string file1 = "/usatlas/u/cher97/flow/runlist.txt", std::string file2 = "/atlasgpfs01/usatlas/data/cher97/spmethod/tots/lists.txt")
 {
     unordered_map<int, pair<string, string>> maps; //int is run number, pair is PC and CC counts;
     std::string line;
     ifstream filein1(file1);
     ifstream filein2(file2);
     //file 1 contains list of files file 2 contains list of PC and CC outputs
+int count = 0;
     while (getline(filein1, line))
     {
-        if (line.find("data18") != std::string::npos)
+        if (line.find("data18") == std::string::npos)
         {
             continue;
         }
-        int run = stoi(line.substr(line.find(".00")+3,6);
-        maps[run]=std::makepair("","");
+        int run = stoi(line.substr(line.find(".00")+3,6));
+//cout << run << endl;
+//cout << line << endl;
+if (maps.find(run)==maps.end()){
+        maps[run]=std::make_pair("","");
+count++;}
     }
+cout << "Total files: " << count << endl;
 
     while (getline(filein2, line))
     {
-        if (line.find("tot.root") != std::string::npos)
+        if (line.find("tot.root") == std::string::npos)
         {
             continue;
         }
-        int run = stoi(line.substr(line.find(".calibration" - 6), 6));
+        int run = stoi(line.substr(line.find(".calibration")- 6, 6));
         int cent = line.substr(line.find("PEB") - 2, 2) == "PC" ? 0 : 1;
         if (maps.find(run) == maps.end())
         {
