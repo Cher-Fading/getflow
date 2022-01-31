@@ -16,7 +16,7 @@ Executable   = /usatlas/u/cher97/getflow/runmcloop.sh
 ## fitth argument - PbPb or not
 ## sixth argument - PbPb string
 ## seventh argument - pnfs or not
-Arguments       = MCE220119.3 _pnfs 18_hi_365678_k1029_m2048 $(Process) 1.5 0.3 HITight True 365678 0.0 1.5 
+Arguments       = MCE220124.2 _pnfs 18_hi_365678_k1029_m2048 $(Process) 1.5 0.3 HITight False 365678 0.0 1.5 False 
 
 # The requirement line specifies which machines we want to
 # run this job on.  Any arbitrary classad expression can
