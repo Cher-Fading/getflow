@@ -54,7 +54,7 @@ fi
 
 	sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runtruthloop.sh@" ~/getflow/condors/runtruth_$co_$1_$2_$3.job
 	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $co \$(Process) $eta $ptTruthCut@" ~/getflow/condors/runtruth_$co_$1_$2_$3.job
-	nof=$(wc -l <~/getflow/txts/$co\_root_pnfs.txt)
+	nof=$(((wc -l <~/getflow/txts/$co\_root_pnfs.txt)/4))
 	#nof=5
 	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/condors/runtruth_$co_$1_$2_$3.job
 	#cat run_PC$c.job

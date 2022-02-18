@@ -1,0 +1,26 @@
+line_0-------------------------------------------------------------
+Dataset: mc15_5TeV.420000.Hijing_PbPb_5p02TeV_MinBias_Flow_JJFV6.recon.AOD.e4962_a868_s2921_r9447
+Specs:-------------------------------------------------------------
+run number: 226000
+eta match range: 2.5
+eta eff range: 2.5
+pT cut: 0.0
+pT Truth cut: 1.0
+data type: AOD
+minimum primary: -1
+-------------------------------------------------------------------
+MCE220214.2_pnfs_15_5TeV_e4962_a868_s2921_r9447_MCEff_2.5_0.3_HITight_False
+line_-------------------------------------------------------------
+line_1-------------------------------------------------------------
+Dataset: mc16_5TeV.420000.Hijing_PbPb_5p02TeV_MinBias_Flow_JJFV6.recon.AOD.e4962_a890_s3136_r11350
+Specs:-------------------------------------------------------------
+run number: 313000
+eta match range: 2.5
+eta eff range: 2.5
+pT cut: 0.0
+pT Truth cut: 1.0
+data type: AOD
+minimum primary: -1
+-------------------------------------------------------------------
+MCE220214.2_pnfs_16_5TeV_e4962_a890_s3136_r11350_MCEff_2.5_0.3_HITight_False
+line_-------------------------------------------------------------
