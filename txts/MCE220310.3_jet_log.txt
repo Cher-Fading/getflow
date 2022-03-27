@@ -1,0 +1,15 @@
+line_0-------------------------------------------------------------
+Dataset: data18_hi.00100000.calibration_PCPEB.merge.AOD.ktest
+Specs:-------------------------------------------------------------
+run number: 100000
+eta match range: 1.5
+pt match min: 0.5
+eta multiplicity count range 2.5
+pT multiplicity count range: 1.0
+pT Truth multiplicity count range: 1.0
+eta Truth multiplicity count range: 2.5
+minimum primary: 0
+Centrality Selection: 1
+-------------------------------------------------------------------
+MCE220310.3_jet_pnfs_18_hi_100000_ktest_MCEff_1.5_0.3_HITight_True
+line_-------------------------------------------------------------

@@ -3,8 +3,8 @@
 input=~/getflow/txts/$1_runlist.txt
 #cat $input
 #cat ~/getflow/$1_runlist.txt
-#./runmc.sh no1:MCE211203.1 no2:1.5(etarange) no3:0.3(min prob) no4:HITight no5:False(do eff) no6:mc no7:0.5(optional minpT default to 0.0) no8:(optional, if efficiency range is different from etamatchrange) no9:1.0 (optional, truthptcut, default to 1.0) no10: 0 (optional minimum primary vertices, default to 0) no11:(optional, centrality choice, default to fcal (1)) no12:50(optional skipping first xx files)
-#./runmc.sh MCE220224.3 2.5 0.3 HITight True mc 0.0 2.5 1.0 0 2
+#./runmc.sh no1:MCE211203.1 no2:1.5(etarange) no3:0.3(min prob) no4:HITight no5:False(do eff) no6:mc no7:0.5(min match pT, default to 0.5) no8:(optional eta mult reco range, default 2.5) no9:1.0 (optional, multptcut, default to 1.0) no10:(optional eta mult truth range, default 2.5) no11:1.0 (optional, truthpt mult, default to 1.0) no12: 0 (optional minimum primary vertices, default to 0) no13:(optional, centrality choice, default to fcal (1)) no14:50(optional skipping first xx files)
+#./runmc.sh MCE220310.3_jet 1.5 0.3 HITight True data 
 #echo $1
 
 linenumber=0
@@ -24,27 +24,43 @@ while IFS= read -r line <&3; do
 	d=${line##*.} #production tag
 
 	if [ "$7" = "" ]; then
-		ptCut=0.0
+		ptCut=0.5
 	else
 		ptCut=$7
 	fi
+	if [ "$8" = "" ]; then
+		etaMult=2.5
+	else
+		etaMult=$8
+	fi
 
 	if [ "$9" = "" ]; then
-		ptTruthCut=1.0
+		ptMult=1.0
 	else
-		ptTruthCut=$9
+		ptMult=$9
 	fi
 
-	if [ "${10}" = "" ]; then
+if [ "${10}" = "" ]; then
+		etaTruthMult=2.5
+	else
+		etaTruthMult=${10}
+	fi
+
+if [ "${11}" = "" ]; then
+		ptTruthMult=1.0
+	else
+		ptTruthMult=${11}
+	fi
+
+	if [ "${12}" = "" ]; then
 		primlim=0
 	else
-		primlim=${10}
+		primlim=${12}
 	fi
-
-	if [ "$5" = "True" ] && [ "$8" != "" ]; then
-		eta=$8
+	if [ "${13}" = "" ]; then
+		cent=1
 	else
-		eta=$2
+		cent=${13}
 	fi
 
 	if [ "${6}" = "mc" ]; then
@@ -64,22 +80,19 @@ while IFS= read -r line <&3; do
 		#echo $c
 		c=$c'_'$runNum
 	fi
-if [ "${11}" = "" ]; then
-		cent=1
-	else
-		cent=${11}
-	fi
 	echo ${bold}Dataset:${normal}' '$line
 	echo ${bold}Specs:${normal}-------------------------------------------------------------
 	#~/getflow/GetPHYSHI_single.sh $line $c $d
 	#echo $c
 	echo ${bold}run number:${normal}' '$runNum
 	echo ${bold}eta match range:${normal}' '$2
-	echo ${bold}eta eff range:${normal}' '$eta
-	echo ${bold}pT cut:${normal}' '$ptCut
-	echo ${bold}pT Truth cut:${normal}' '$ptTruthCut
+	echo ${bold}pt match min:${normal}' '$ptCut
+	echo ${bold}eta multiplicity count range:${normal}' '$etaMult
+	echo ${bold}pT multiplicity count range:${normal}' '$ptMult
+	echo ${bold}pT Truth multiplicity count range:${normal}' '$ptTruthMult
+	echo ${bold}eta Truth multiplicity count range:${normal}' '$etaTruthMult	
         echo ${bold}minimum primary:${normal}' '$primlim
-echo ${bold}Centrality Selection:${normal}' '$cent
+	echo ${bold}Centrality Selection:${normal}' '$cent
 
 	echo 'Dataset: '$line >>~/getflow/txts/$1_log.txt
 	echo Specs:------------------------------------------------------------- >>~/getflow/txts/$1_log.txt
@@ -87,22 +100,24 @@ echo ${bold}Centrality Selection:${normal}' '$cent
 	#echo $c
 	echo 'run number: '$runNum >>~/getflow/txts/$1_log.txt
 	echo 'eta match range: '$2 >>~/getflow/txts/$1_log.txt
-	echo 'eta eff range: '$eta >>~/getflow/txts/$1_log.txt
-	echo 'pT cut: '$ptCut >>~/getflow/txts/$1_log.txt
-	echo 'pT Truth cut: '$ptTruthCut >>~/getflow/txts/$1_log.txt
-echo 'minimum primary: '$primlim >>~/getflow/txts/$1_log.txt
-echo 'Centrality Selection: '$cent>>~/getflow/txts/$1_log.txt
+	echo 'pt match min: '$ptCut >>~/getflow/txts/$1_log.txt
+	echo 'eta multiplicity count range '$etaMult >>~/getflow/txts/$1_log.txt
+	echo 'pT multiplicity count range: '$ptMult >>~/getflow/txts/$1_log.txt
+	echo 'pT Truth multiplicity count range: '$ptTruthMult >>~/getflow/txts/$1_log.txt
+	echo 'eta Truth multiplicity count range: '$etaTruthMult >>~/getflow/txts/$1_log.txt
+	echo 'minimum primary: '$primlim >>~/getflow/txts/$1_log.txt
+	echo 'Centrality Selection: '$cent>>~/getflow/txts/$1_log.txt
 	co=$c'_'$d
 	#echo $co
 
 	cp ~/getflow/condors/run_temp.job ~/getflow/condors/runmc_$co_$1_$2_$3_$4_$5.job
 
 	sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runmcloop.sh@" ~/getflow/condors/runmc_$co_$1_$2_$3_$4_$5.job
-	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $co \$(Process) $2 $3 $4 $5 $runNum $ptCut $eta $isMC $ptTruthCut $primlim $cent ${12}@" ~/getflow/condors/runmc_$co_$1_$2_$3_$4_$5.job
+	sed -i "s@^Arguments.*@Arguments       = $1 _pnfs $co \$(Process) $2 $3 $4 $5 $runNum $isMC $ptCut $ptMult $etaMult $ptTruthMult $etaTruthMult $primlim $cent ${14}@" ~/getflow/condors/runmc_$co_$1_$2_$3_$4_$5.job
 	nofful=$(wc -l <~/getflow/txts/$co\_root_pnfs.txt)
 nof=$nofful
 	#nof=$((nofful/4))
-	nof=10
+	nof=$nofful
 	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/condors/runmc_$co_$1_$2_$3_$4_$5.job
 	#cat run_PC$c.job
 	echo '-------------------------------------------------------------------'
