@@ -4,7 +4,7 @@ input=~/getflow/txts/$6_runlist.txt
 #cat $input
 #cat ~/getflow/$1_runlist.txt
 #./runmc.sh no1:MCE211203.1 no2:1.5(etarange) no3:0.3(min prob) no4:HITight no5:False(do eff) no6:mc no7:0.5(min match pT, default to 0.5) no8:(optional eta mult reco range, default 2.5) no9:1.0 (optional, multptcut, default to 1.0) no10:(optional eta mult truth range, default 2.5) no11:1.0 (optional, truthpt mult, default to 1.0) no12: 0 (optional minimum primary vertices, default to 0) no13:(optional, centrality choice, default to fcal (1)) no14:50(optional skipping first xx files)
-#./runmc.sh MCE220310.3_jet 1.5 0.3 HITight True data
+#./runmc.sh MCE220329.1 2.5 0.3 HITight True mc18jet
 #echo $1
 
 linenumber=0
@@ -19,7 +19,13 @@ while IFS= read -r line <&3; do
 	if [ "$line" = "" ]; then
 		break
 	fi
-	b=${line#*$6}
+	if [[ "$6" = *"mc"* ]]; then
+	b=${line#*mc}
+	echo $b
+	fi
+	if [[ "$6" = *"data"* ]]; then
+	b=${line#*data}
+	fi
 	c=${b%%.*}    #data campaign
 	d=${line##*.} #production tag
 
@@ -63,7 +69,7 @@ while IFS= read -r line <&3; do
 		cent=${13}
 	fi
 
-	if [ "${6}" = "*mc*" ]; then
+	if [[ "${6}" = *"mc"* ]]; then
 		isMC=True
 		if [ "$c" = "15_5TeV" ]; then
 			runNum=226000
@@ -72,7 +78,7 @@ while IFS= read -r line <&3; do
 			runNum=313000
 		fi
 	fi
-	if [ "$6" = "*data*" ]; then
+	if [[ "$6" = *"data"* ]]; then
 		isMC=False
 		temp=${b#*.}
 		runNum=${temp%%.*}
@@ -81,11 +87,11 @@ while IFS= read -r line <&3; do
 		c=$c'_'$runNum
 	fi
 	hasjets=False
-	if [ "$6" = "*jet*"]; then
+	if [[ "$6" = *"jet"* ]]; then
 		hasjets=True
 	fi
 	JZ=-1
-	if [ "$6" = "*mc*jet*"]; then
+	if [[ "$6" = *"mc"*"jet"* ]]; then
 		tmps=${line#*JZ}
 		JZ=${tmps:0:1}
 	fi
@@ -122,7 +128,7 @@ while IFS= read -r line <&3; do
 	echo 'HasJets? '$hasjets >>~/getflow/txts/$1_$6_log.txt
 	echo 'JZ: '$JZ >>~/getflow/txts/$1_$6_log.txt
 	co=$c'_'$d
-	#echo $co
+	echo $co
 
 	cp ~/getflow/condors/run_temp.job ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
 
@@ -150,8 +156,8 @@ while IFS= read -r line <&3; do
 	mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5/
 	echo $1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5
 	echo $1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5 >>~/getflow/txts/$1_$6_log.txt
-	#cat ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
-	condor_submit ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
+	cat ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
+	#condor_submit ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
 	linenumber=$((linenumber + 1))
 	echo 'line_-------------------------------------------------------------' >>~/getflow/txts/$1_$6_log.txt
 	echo 'line_'${bold}$linenumber${normal}'-------------------------------------------------------------'

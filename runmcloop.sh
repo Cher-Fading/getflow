@@ -13,6 +13,7 @@ offset=${20}
 echo $offset
 while IFS= read -r line; do
 	if [ $4 -eq $((linenumber - offset)) ]; then
+echo $line
 		tempdir=$(mktemp -d)
 		cd $tempdir
 		echo $tempdir
