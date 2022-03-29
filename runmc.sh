@@ -80,6 +80,16 @@ while IFS= read -r line <&3; do
 		#echo $c
 		c=$c'_'$runNum
 	fi
+	hasjets=False
+	if [ "$6" = "*jet*"]; then
+		hasjets=True
+	fi
+	JZ=-1
+	if [ "$6" = "*mc*jet*"]; then
+		tmps=${line#*JZ}
+		JZ=${tmps:0:1}
+	fi
+
 	echo ${bold}Dataset:${normal}' '$line
 	echo ${bold}Specs:${normal}-------------------------------------------------------------
 	#~/getflow/GetPHYSHI_single.sh $line $c $d
@@ -93,6 +103,8 @@ while IFS= read -r line <&3; do
 	echo ${bold}eta Truth multiplicity count range:${normal}' '$etaTruthMult
 	echo ${bold}minimum primary:${normal}' '$primlim
 	echo ${bold}Centrality Selection:${normal}' '$cent
+	echo ${bold}HasJets?${normal}' '$hasjets
+	echo ${bold}JZ:${normal}' '$JZ
 
 	echo 'Dataset: '$line >>~/getflow/txts/$1_$6_log.txt
 	echo Specs:------------------------------------------------------------- >>~/getflow/txts/$1_$6_log.txt
@@ -107,13 +119,15 @@ while IFS= read -r line <&3; do
 	echo 'eta Truth multiplicity count range: '$etaTruthMult >>~/getflow/txts/$1_$6_log.txt
 	echo 'minimum primary: '$primlim >>~/getflow/txts/$1_$6_log.txt
 	echo 'Centrality Selection: '$cent >>~/getflow/txts/$1_$6_log.txt
+	echo 'HasJets? '$hasjets >>~/getflow/txts/$1_$6_log.txt
+	echo 'JZ: '$JZ >>~/getflow/txts/$1_$6_log.txt
 	co=$c'_'$d
 	#echo $co
 
 	cp ~/getflow/condors/run_temp.job ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
 
 	sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runmcloop.sh@" ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
-	sed -i "s@^Arguments.*@Arguments       = $1_$6 _pnfs $co \$(Process) $2 $3 $4 $5 $runNum $isMC $ptCut $ptMult $etaMult $ptTruthMult $etaTruthMult $primlim $cent ${14}@" ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
+	sed -i "s@^Arguments.*@Arguments       = $1_$6 _pnfs $co \$(Process) $2 $3 $4 $5 $runNum $isMC $ptCut $ptMult $etaMult $ptTruthMult $etaTruthMult $primlim $cent $hasjets $JZ ${14}@" ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
 	nofful=$(wc -l <~/getflow/txts/$co\_root_pnfs.txt)
 	nof=$nofful
 	#nof=$((nofful/4))
@@ -136,7 +150,7 @@ while IFS= read -r line <&3; do
 	mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5/
 	echo $1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5
 	echo $1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5 >>~/getflow/txts/$1_$6_log.txt
-	#cat ~/getflow/condors/runmc_$co_$1_$2_$3_$4_$5.job
+	#cat ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
 	condor_submit ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
 	linenumber=$((linenumber + 1))
 	echo 'line_-------------------------------------------------------------' >>~/getflow/txts/$1_$6_log.txt
