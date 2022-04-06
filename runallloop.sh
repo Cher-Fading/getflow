@@ -12,7 +12,7 @@ offset=${4}
 echo $offset
 while IFS= read -r line; do
 	if [ $1 -eq $((linenumber - offset)) ]; then
-echo $line
+		echo $line
 		tempdir=$(mktemp -d)
 		cd $tempdir
 		echo $tempdir
@@ -29,11 +29,11 @@ echo $line
 		sed -i "s@^ROOT.SH.ScanDir().filePattern(.*@ROOT.SH.ScanDir().filePattern( '$filename').scan( sh, inputFilePath )@" $tempdir/'tempout'$2_$linenumber/ATestRun_eljob.py
 		sed -i "s@.*alg.FileName.*@alg.FileName = \"mce_$1_$linenumber\"@" $tempdir/'tempout'$2_$linenumber/ATestRun_eljob.py
 		JZ=-1
-	if [[ "$6" = *"mc"*"jet"* ]]; then
-		tmps=${line#*JZ}
-		JZ=${tmps:0:1}
-sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" $tempdir/'tempout'$2_$linenumber/ATestRun_eljob.py
-	fi
+		if [[ "$6" = *"mc"*"jet"* ]]; then
+			tmps=${line#*JZ}
+			JZ=${tmps:0:1}
+			sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" $tempdir/'tempout'$2_$linenumber/ATestRun_eljob.py
+		fi
 		#echo $PWD
 		$tempdir/'tempout'$2_$linenumber/ATestRun_eljob.py --submission-dir=submitDir
 		cp $tempdir/tempout$2_$linenumber/submitDir/data-myOutput/*.root /atlasgpfs01/usatlas/data/cher97/$2/mce_$1_$linenumber'.root'

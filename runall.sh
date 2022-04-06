@@ -9,14 +9,14 @@ emacs ~/getflow/py/ATestRun_eljob$1_$2_$3.py
 template=$1_$2_$3
 linenumber=1
 if [ "$4" = "" ]; then
-skip=0
+	skip=0
 else
-skip=$4
+	skip=$4
 fi
 
 while IFS= read -r line <&3; do
 	echo 'line_'${bold}$linenumber${normal}'-------------------------------------------------------------'
-folder=$1_$2_$3_$linenumber
+	folder=$1_$2_$3_$linenumber
 
 	if [ "$line" = "" ]; then
 		break
@@ -30,7 +30,6 @@ folder=$1_$2_$3_$linenumber
 	nof=$nofful
 	#nof=$((nofful/4))
 	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/condors/runall_$folder.job
-
 
 	#exec 0<&1
 
