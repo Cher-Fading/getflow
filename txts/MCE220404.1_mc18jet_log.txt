@@ -1,0 +1,85 @@
+line_0-------------------------------------------------------------
+Dataset: mc16_5TeV.420011.Pythia8EvtGen_A14NNPDF23LO_jetjet_JZ1R04.merge.AOD.e4108_d1516_r11439_r11217_p4238JZ1
+Specs:-------------------------------------------------------------
+run number: 313000
+eta match range: 2.5
+pt match min: 0.5
+eta multiplicity count range 2.5
+pT multiplicity count range: 1.0
+pT Truth multiplicity count range: 1.0
+eta Truth multiplicity count range: 2.5
+minimum primary: 0
+Centrality Selection: 1
+HasJets? True
+JZ: 1
+-------------------------------------------------------------------
+MCE220404.1_mc18jet_pnfs_16_5TeV_e4108_d1516_r11439_r11217_p4238JZ1_MCEff_2.5_0.3_HITight_True
+line_-------------------------------------------------------------
+line_1-------------------------------------------------------------
+Dataset: mc16_5TeV.420012.Pythia8EvtGen_A14NNPDF23LO_jetjet_JZ2R04.merge.AOD.e4108_d1516_r11439_r11217_p4238JZ2
+Specs:-------------------------------------------------------------
+run number: 313000
+eta match range: 2.5
+pt match min: 0.5
+eta multiplicity count range 2.5
+pT multiplicity count range: 1.0
+pT Truth multiplicity count range: 1.0
+eta Truth multiplicity count range: 2.5
+minimum primary: 0
+Centrality Selection: 1
+HasJets? True
+JZ: 2
+-------------------------------------------------------------------
+MCE220404.1_mc18jet_pnfs_16_5TeV_e4108_d1516_r11439_r11217_p4238JZ2_MCEff_2.5_0.3_HITight_True
+line_-------------------------------------------------------------
+line_2-------------------------------------------------------------
+Dataset: mc16_5TeV.420013.Pythia8EvtGen_A14NNPDF23LO_jetjet_JZ3R04.merge.AOD.e4108_d1516_r11439_r11217_p4238JZ3
+Specs:-------------------------------------------------------------
+run number: 313000
+eta match range: 2.5
+pt match min: 0.5
+eta multiplicity count range 2.5
+pT multiplicity count range: 1.0
+pT Truth multiplicity count range: 1.0
+eta Truth multiplicity count range: 2.5
+minimum primary: 0
+Centrality Selection: 1
+HasJets? True
+JZ: 3
+-------------------------------------------------------------------
+MCE220404.1_mc18jet_pnfs_16_5TeV_e4108_d1516_r11439_r11217_p4238JZ3_MCEff_2.5_0.3_HITight_True
+line_-------------------------------------------------------------
+line_3-------------------------------------------------------------
+Dataset: mc16_5TeV.420014.Pythia8EvtGen_A14NNPDF23LO_jetjet_JZ4R04.merge.AOD.e4108_d1516_r11439_r11217_p4238JZ4
+Specs:-------------------------------------------------------------
+run number: 313000
+eta match range: 2.5
+pt match min: 0.5
+eta multiplicity count range 2.5
+pT multiplicity count range: 1.0
+pT Truth multiplicity count range: 1.0
+eta Truth multiplicity count range: 2.5
+minimum primary: 0
+Centrality Selection: 1
+HasJets? True
+JZ: 4
+-------------------------------------------------------------------
+MCE220404.1_mc18jet_pnfs_16_5TeV_e4108_d1516_r11439_r11217_p4238JZ4_MCEff_2.5_0.3_HITight_True
+line_-------------------------------------------------------------
+line_4-------------------------------------------------------------
+Dataset: mc16_5TeV.420015.Pythia8EvtGen_A14NNPDF23LO_jetjet_JZ5R04.merge.AOD.e4108_d1516_r11439_r11217_p4238JZ5
+Specs:-------------------------------------------------------------
+run number: 313000
+eta match range: 2.5
+pt match min: 0.5
+eta multiplicity count range 2.5
+pT multiplicity count range: 1.0
+pT Truth multiplicity count range: 1.0
+eta Truth multiplicity count range: 2.5
+minimum primary: 0
+Centrality Selection: 1
+HasJets? True
+JZ: 5
+-------------------------------------------------------------------
+MCE220404.1_mc18jet_pnfs_16_5TeV_e4108_d1516_r11439_r11217_p4238JZ5_MCEff_2.5_0.3_HITight_True
+line_-------------------------------------------------------------

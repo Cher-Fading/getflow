@@ -156,8 +156,8 @@ while IFS= read -r line <&3; do
 	mkdir -p /atlasgpfs01/usatlas/data/cher97/$1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5/
 	echo $1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5
 	echo $1_$6_pnfs_$co'_MCEff_'$2_$3_$4_$5 >>~/getflow/txts/$1_$6_log.txt
-	cat ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
-	#condor_submit ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
+	#cat ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
+	condor_submit ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
 	linenumber=$((linenumber + 1))
 	echo 'line_-------------------------------------------------------------' >>~/getflow/txts/$1_$6_log.txt
 	echo 'line_'${bold}$linenumber${normal}'-------------------------------------------------------------'

@@ -46,10 +46,11 @@ echo $line
 
 		sed -i "s@.*alg.PrimLim.*@alg.PrimLim = ${16}@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		sed -i "s@.*alg.Cent.*@alg.Cent = ${17}@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
-		sed -i "s@.*alg.Cent.*@alg.hasJets = ${18}@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
-		sed -i "s@.*alg.Cent.*@alg.JZ = ${19}@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
+		sed -i "s@.*alg.hasJets.*@alg.hasJets = ${18}@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
+		sed -i "s@.*alg.JZ.*@alg.JZ = ${19}@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		#sed -i "s@^ROOT.SH.ScanDir().filePattern.*@ROOT.SH.ScanDir().filePattern( \'\*${14}\*\').scan( sh, inputFilePath )@" $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		#echo $PWD
+		#cat $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py
 		$tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py --submission-dir=submitDir
 		cp $tempdir/tempout$3_$linenumber/submitDir/data-myOutput/*.root /atlasgpfs01/usatlas/data/cher97/$1$2_$3'_MCEff_'$5_$6_$7_$8/mce_$4_$linenumber'.root'
 		cp $tempdir/'tempout'$3_$linenumber/ATestRun_eljob.py /atlasgpfs01/usatlas/data/cher97/$1$2_$3'_MCEff_'$5_$6_$7_$8/mce_$4_$linenumber'ATestRun_eljob.py'
