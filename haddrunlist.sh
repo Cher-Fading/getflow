@@ -1,15 +1,13 @@
 #!/bin/bash
-#./haddrunlist.sh $1(part1) $2(part2) $3(iterate begin) $4(iterate end)
-dest=/atlasgpfs01/usatlas/data/cher97
+#./haddrunlist.sh $1(masterfolder) $2(part1) $3(part2) $4(iterate begin) $5(iterate end)
+dest=/atlasgpfs01/usatlas/data/cher97/$1
 cd $dest
-for i in `seq $3 $4`;
+for i in `seq $4 $5`;
 do
-	cd $dest/$1$i$2
+	cd $dest/$2$i$3
 	mkdir -p tot
 	cd tot
-	hadd $1$i$2.root ../*.root
+	hadd $2$i$3.root ../*.root
 done
 cd $dest
-mkdir $1$2
-cd $1$2
-hadd -f $1$2.root ../$1*$2/tot/*.root
+hadd -f $2$3.root $2*$3/tot/*.root

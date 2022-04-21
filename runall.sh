@@ -4,8 +4,12 @@ input=~/getflow/txts/$3runall_runlist.txt
 
 #./runmc.sh no1:location no2:MCE211203.1 no3:mc18jet no4:optional,skip first n
 #copy and open to be edited steering macro
-cp ~/$1/source/MyAnalysis/share/ATestRun_eljob.py ~/getflow/py/ATestRun_eljob$1_$2_$3.py
-emacs ~/getflow/py/ATestRun_eljob$1_$2_$3.py
+mkdir -p ~/getflow/py/$1
+mkdir -p ~/getflow/condors/$1
+mkdir -p /atlasgpfs01/usatlas/data/cher97/$1
+
+cp ~/$1/source/MyAnalysis/share/ATestRun_eljob.py ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
+emacs ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
 template=$1_$2_$3
 linenumber=1
 if [ "$4" = "" ]; then
@@ -16,20 +20,27 @@ fi
 
 while IFS= read -r line <&3; do
 	echo 'line_'${bold}$linenumber${normal}'-------------------------------------------------------------'
-	folder=$1_$2_$3_$linenumber
+	folder=$1/$1_$2_$3_$linenumber
+cp ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py ~/getflow/py/$folder'ATestRun_eljob.py'
+		JZ=-1
+		if [[ "$3" = *"mc"*"jet"* ]]; then
+			tmps=${line#*JZ}
+			JZ=${tmps:0:1}
+			sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" ~/getflow/py/$folder'ATestRun_eljob.py'
+		fi
 
 	if [ "$line" = "" ]; then
 		break
 	fi
 
-	cp ~/getflow/condors/run_temp.job ~/getflow/condors/runall_$folder.job
+	cp ~/getflow/condors/run_temp.job ~/getflow/condors/$folder'_runall.job'
 
-	sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runallloop.sh@" ~/getflow/condors/runall_$folder.job
-	sed -i "s@^Arguments.*@Arguments       = \$(Process) $folder $line $skip $template@" ~/getflow/condors/runall_$folder.job
+	sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runallloop.sh@" ~/getflow/condors/$folder'_runall.job'
+	sed -i "s@^Arguments.*@Arguments       = \$(Process) $folder $line $skip@" ~/getflow/condors/$folder'_runall.job'
 	nofful=$(wc -l <~/getflow/txts/$line.txt)
 	nof=$nofful
 	#nof=$((nofful/4))
-	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/condors/runall_$folder.job
+	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/condors/$folder'_runall.job'
 
 	#exec 0<&1
 
@@ -43,7 +54,7 @@ while IFS= read -r line <&3; do
 
 	mkdir -p /atlasgpfs01/usatlas/data/cher97/$folder/
 
-	#cat ~/getflow/condors/runmc_$co_$1_$6_$2_$3_$4_$5.job
-	condor_submit ~/getflow/condors/runall_$folder.job
+	#cat ~/getflow/condors/$folder'_runall.job'
+	condor_submit ~/getflow/condors/$folder'_runall.job'
 	linenumber=$((linenumber + 1))
 done 3<$input
