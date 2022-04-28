@@ -13,48 +13,48 @@ emacs ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
 template=$1_$2_$3
 linenumber=1
 if [ "$4" = "" ]; then
-	skip=0
+    skip=0
 else
-	skip=$4
+    skip=$4
 fi
 
 while IFS= read -r line <&3; do
-	echo 'line_'${bold}$linenumber${normal}'-------------------------------------------------------------'
-	folder=$1/$1_$2_$3_$linenumber
-cp ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py ~/getflow/py/$folder'ATestRun_eljob.py'
-		JZ=-1
-		if [[ "$3" = *"mc"*"jet"* ]]; then
-			tmps=${line#*JZ}
-			JZ=${tmps:0:1}
-			sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" ~/getflow/py/$folder'ATestRun_eljob.py'
-		fi
+    echo 'line_'${bold}$linenumber${normal}'-------------------------------------------------------------'
+    folder=$1/$1_$2_$3_$linenumber
+    cp ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py ~/getflow/py/$folder'ATestRun_eljob.py'
+    JZ=-1
+    if [[ "$3" = *"mc"*"jet"* ]]; then
+        tmps=${line#*JZ}
+        JZ=${tmps:0:1}
+        sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" ~/getflow/py/$folder'ATestRun_eljob.py'
+    fi
 
-	if [ "$line" = "" ]; then
-		break
-	fi
+    if [ "$line" = "" ]; then
+        break
+    fi
 
-	cp ~/getflow/condors/run_temp.job ~/getflow/condors/$folder'_runall.job'
+    cp ~/getflow/condors/run_temp.job ~/getflow/condors/$folder'_runall.job'
 
-	sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runallloop.sh@" ~/getflow/condors/$folder'_runall.job'
-	sed -i "s@^Arguments.*@Arguments       = \$(Process) $folder $line $skip@" ~/getflow/condors/$folder'_runall.job'
-	nofful=$(wc -l <~/getflow/txts/$line.txt)
-	nof=$nofful
-	#nof=$((nofful/4))
-	sed -i "s@^Queue.*@Queue $nof@" ~/getflow/condors/$folder'_runall.job'
+    sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runallloop.sh@" ~/getflow/condors/$folder'_runall.job'
+    sed -i "s@^Arguments.*@Arguments       = \$(Process) $folder $line $skip@" ~/getflow/condors/$folder'_runall.job'
+    nofful=$(wc -l <~/getflow/txts/$line.txt)
+    nof=$nofful
+    #nof=$((nofful/4))
+    sed -i "s@^Queue.*@Queue $nof@" ~/getflow/condors/$folder'_runall.job'
 
-	#exec 0<&1
+    #exec 0<&1
 
-	read -p "Do you wish to remove old folder and rerun? (y/n) " answer
-	if [[ $answer =~ ^[Yy]$ ]]; then
-		echo "deleting original run folder"
-		rm -rf /atlasgpfs01/usatlas/data/cher97/$folder/
-	else
-		echo "writing to old folder"
-	fi
+    read -p "Do you wish to remove old folder and rerun? (y/n) " answer
+    if [[ $answer =~ ^[Yy]$ ]]; then
+        echo "deleting original run folder"
+        rm -rf /atlasgpfs01/usatlas/data/cher97/$folder/
+    else
+        echo "writing to old folder"
+    fi
 
-	mkdir -p /atlasgpfs01/usatlas/data/cher97/$folder/
+    mkdir -p /atlasgpfs01/usatlas/data/cher97/$folder/
 
-	#cat ~/getflow/condors/$folder'_runall.job'
-	condor_submit ~/getflow/condors/$folder'_runall.job'
-	linenumber=$((linenumber + 1))
+    #cat ~/getflow/condors/$folder'_runall.job'
+    condor_submit ~/getflow/condors/$folder'_runall.job'
+    linenumber=$((linenumber + 1))
 done 3<$input
