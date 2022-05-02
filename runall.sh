@@ -2,20 +2,31 @@
 
 input=~/getflow/txts/$3runall_runlist.txt
 
-#./runmc.sh no1:location no2:MCE211203.1 no3:mc18jet no4:optional,skip first n
+#./runmc.sh no1:location no2:MCE211203.1 no3:mc18jet no4: optional, subsampling no5:optional combine m files
 #copy and open to be edited steering macro
 mkdir -p ~/getflow/py/$1
 mkdir -p ~/getflow/condors/$1
 mkdir -p /atlasgpfs01/usatlas/data/cher97/$1
 
-cp ~/$1/source/MyAnalysis/share/ATestRun_eljob.py ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
+cd ~/$1
+git tag -a $2 -m "$2"
+git push --tags
+
+cp ~/$1/source/MyAnalysis/share/ATestRun_eljob_local.py ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
 emacs ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
 template=$1_$2_$3
 linenumber=1
-if [ "$4" = "" ]; then
-    skip=0
+
+if [ "$4" == "" ]; then
+    nsubs=1
 else
-    skip=$4
+    nsubs=$4
+fi
+
+if [ "$5" == "" ]; then
+    comb=1
+else
+    comb=$5
 fi
 
 while IFS= read -r line <&3; do
@@ -29,6 +40,13 @@ while IFS= read -r line <&3; do
         sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" ~/getflow/py/$folder'ATestRun_eljob.py'
     fi
 
+    runnum=000000
+    if [[ "$3" == *"data"* ]]; then
+        tmps=${line#*JZ}
+        JZ=${tmps:0:1}
+        sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" ~/getflow/py/$folder'ATestRun_eljob.py'
+    fi
+
     if [ "$line" = "" ]; then
         break
     fi
@@ -36,7 +54,7 @@ while IFS= read -r line <&3; do
     cp ~/getflow/condors/run_temp.job ~/getflow/condors/$folder'_runall.job'
 
     sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runallloop.sh@" ~/getflow/condors/$folder'_runall.job'
-    sed -i "s@^Arguments.*@Arguments       = \$(Process) $folder $line $skip@" ~/getflow/condors/$folder'_runall.job'
+    sed -i "s@^Arguments.*@Arguments       = \$(Process) $folder $line $nsubs $comb@" ~/getflow/condors/$folder'_runall.job'
     nofful=$(wc -l <~/getflow/txts/$line.txt)
     nof=$nofful
     #nof=$((nofful/4))
