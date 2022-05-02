@@ -56,8 +56,7 @@ while IFS= read -r line <&3; do
     sed -i "s@^Executable.*@Executable   = /usatlas/u/cher97/getflow/runallloop.sh@" ~/getflow/condors/$folder'_runall.job'
     sed -i "s@^Arguments.*@Arguments       = \$(Process) $folder $line $nsubs $comb@" ~/getflow/condors/$folder'_runall.job'
     nofful=$(wc -l <~/getflow/txts/$line.txt)
-    nof=$nofful
-    #nof=$((nofful/4))
+    nof=$((nofful/comb))
     sed -i "s@^Queue.*@Queue $nof@" ~/getflow/condors/$folder'_runall.job'
 
     #exec 0<&1
