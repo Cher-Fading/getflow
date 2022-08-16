@@ -40,13 +40,6 @@ while IFS= read -r line <&3; do
         sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" ~/getflow/py/$folder'ATestRun_eljob.py'
     fi
 
-    runnum=000000
-    if [[ "$3" == *"data"* ]]; then
-        tmps=${line#*JZ}
-        JZ=${tmps:0:1}
-        sed -i "s@.*alg.JZ.*@alg.JZ = $JZ@" ~/getflow/py/$folder'ATestRun_eljob.py'
-    fi
-
     if [ "$line" = "" ]; then
         break
     fi

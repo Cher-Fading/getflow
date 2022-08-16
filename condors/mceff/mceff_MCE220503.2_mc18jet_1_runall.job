@@ -16,7 +16,7 @@ Executable   = /usatlas/u/cher97/getflow/runallloop.sh
 ## fitth argument - PbPb or not
 ## sixth argument - PbPb string
 ## seventh argument - pnfs or not
-Arguments       = $(Process) spmemthod/spmemthod_SPMethod220502.1_data18jet_1 data18_hi.00100000.streamtest.merge.AOD.ktest 20 0
+Arguments       = $(Process) mceff/mceff_MCE220503.2_mc18jet_1 mc16_5TeV.420011.Pythia8EvtGen_A14NNPDF23LO_jetjet_JZ1R04.deriv.DAOD_HION7.e4108_d1516_r11439_r11217_p4283 1 1
 
 # The requirement line specifies which machines we want to
 # run this job on.  Any arbitrary classad expression can
@@ -76,4 +76,4 @@ accounting_group = group_atlas.uillu
 # job.  If a number is placed after the command (i.e. Queue 15)
 # then the job will be submitted N times.  Use the $(Process)
 # macro to make your input/output and log files unique.
-Queue 6844
+Queue 222

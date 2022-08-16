@@ -34,9 +34,10 @@ echo $filename
 mkdir -p $tempdir/'tempout'$2_$bg
 cd $tempdir/'tempout'$2_$bg
 cp /usatlas/u/cher97/getflow/py/$2ATestRun_eljob.py $tempdir/'tempout'$2_$bg/ATestRun_eljob.py
+sed -i "s@^alg.numSubs.*@alg.numSubs=$4@" $tempdir/'tempout'$2_$bg/ATestRun_eljob.py
 sed -i "s@^inputFilePath = .*@inputFilePath = '$tempdir/tempin$2_$bg'@" $tempdir/'tempout'$2_$bg/ATestRun_eljob.py
 # sed -i "s@^ROOT.SH.ScanDir().filePattern(.*@ROOT.SH.ScanDir().filePattern( '*root*').scan( sh, inputFilePath )@" $tempdir/'tempout'$2_$bg/ATestRun_eljob.py
-for ((i = 0; i < $4; i++)); do
+for (( i=0; i<$4; i++ )); do
     mkdir -p /atlasgpfs01/usatlas/data/cher97/$2/sub$4.$i/
     cp $tempdir/'tempout'$2_$bg/ATestRun_eljob.py $tempdir/'tempout'$2_$bg/ATestRun_eljob$4.$i.py
     chmod +x $tempdir/'tempout'$2_$bg/ATestRun_eljob$4.$i.py
