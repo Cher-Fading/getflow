@@ -2,7 +2,7 @@
 
 input=~/getflow/txts/$3runall_runlist.txt
 
-#./runmc.sh no1:location no2:MCE211203.1 no3:mc18jet no4: optional, subsampling no5:optional combine m files
+#./runall.sh no1:location no2:MCE211203.1 no3:mc18jet no4: optional, subsampling no5:optional combine m files
 #copy and open to be edited steering macro
 mkdir -p ~/getflow/py/$1
 mkdir -p ~/getflow/condors/$1
