@@ -9,10 +9,10 @@ for j in $(seq 0 9); do
         mkdir -p tot$1.$j
         cd tot$1.$j
         echo 'pwd'$1'_'$j'_'$PWD
-        hadd $dest/tot$1.$j/$2sub$3.$1.$j.root ../mce_$j*.root
+        hadd $dest/tot$1.$j/sub$3.$1.$j.root ../mce_$j*.root
 
-        find ../*.root -size 0 >$dest/tot$j/$2sub$3.$1.$j_size0.txt
+        find ../*.root -size 0 >$dest/tot$j/sub$3.$1.$j_size0.txt
 done
 mkdir -p $dest/tots
-hadd -f $dest/tots/$2sub$3.$1.root $dest/tots/$2sub$3.$1.*.root
+hadd -f $dest/tots/sub$3.$1.root $dest/tots/sub$3.$1.*.root
 
