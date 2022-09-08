@@ -12,7 +12,7 @@ linenumber=0
 comb=$5
 outputnumber=$1
 bg=$((comb * outputnumber))
-ed=$((comb * (outputnumber+1)))
+ed=$((comb * (outputnumber+1) ))
 
 tempdir=$(mktemp -d)
 cd $tempdir
