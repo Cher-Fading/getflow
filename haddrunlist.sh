@@ -4,16 +4,15 @@
 dest=/atlasgpfs01/usatlas/data/cher97/$1
 cd $dest
 suffix=${3#*/}
+prefix=${2%/*}
 for j in $(seq 0 9); do
     for i in $(seq $4 $5); do
         cd $dest/$2$i$3
-        mkdir -p tot$j
-        cd tot$j
-        echo $3
-        echo 'pwd'$PWD
+        mkdir -p tot$i.$j
+        cd tot$i.$j
+        echo 'pwd: '$PWD
 
-        echo $suffix
-        hadd $dest/$2$i$3/tot$7/$2$i$suffix.root ../mce_$j*.root
+        hadd $dest/$2$i$3/tot$i.$j/$prefix$i$suffix.root ../mce_$j*.root
 
         find ../*.root -size 0
         if [ "$6" == "delete" ]; then
@@ -32,7 +31,10 @@ for j in $(seq 0 9); do
             fi
         fi
     done
+cd $dest/$2$i$3
+        mkdir -p tots$i
+hadd -f $dest/$2$i$3/tots$i/$2$i$suffix.root $dest/$2$i$3/tot$i.*/$2$i$suffix.root
 done
-hadd -f $dest/$2$i$3/tot/$2$i$suffix.root $dest/$2$i$3/tot*/$2$i$suffix.root
-#cd $dest
-#hadd -f $2$suffix.root $2*$3/tot/*.root
+cd $dest/$2$i$3
+        mkdir -p tot
+hadd -f $dest/$2$i$3/tot/$2$suffix.root $dest/$2$i$3/tots*/$2$i$suffix.root
