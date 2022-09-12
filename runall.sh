@@ -13,6 +13,8 @@ git tag -a $2 -m "$2"
 git push --tags
 
 cp ~/$1/source/MyAnalysis/share/ATestRun_eljob_local.py ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
+sed -i "s@.*job.options().setDouble( ROOT.EL.Job.optMaxEvents,.*@#job.options().setDouble( ROOT.EL.Job.optMaxEvents, 100)@" ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
+sed -i "s@.*alg.Verbose.*@alg.Verbose = False@" ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
 emacs ~/getflow/py/$1/ATestRun_eljob$1_$2_$3.py
 template=$1_$2_$3
 linenumber=1
