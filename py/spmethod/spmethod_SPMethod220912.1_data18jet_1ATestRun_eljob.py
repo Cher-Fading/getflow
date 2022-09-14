@@ -70,7 +70,7 @@ alg.Perf = False
 alg.OF2 = False
 # alg.Overflow = True
 alg.CentTrunc=0
-alg.JetParticlePtCut=79.0
+alg.JetParticlePtCut=79.00
 
 #from AnaAlgorithm.DualUseConfig import addPrivateTool
 # add the GRL tool to the algorithm
