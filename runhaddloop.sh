@@ -16,8 +16,11 @@ for j in $(seq 0 $((n-1)) ); do
         echo 'pwd'$1'_'$j'_'$PWD
         hadd $dest/tot$1.$j/sub$3.$1.$j.root @$dest/totalfiles$j.txt
 	#cat $dest/totalfiles$j.txt
+input=$dest/totalfiles$j.txt
+while IFS= read -r line <&3; do
+        find $line -size 0 >$dest/tot$1.$j/sub$3.$1.$j'_size0.txt'
+done 3<$input
 
-        find ../*.root -size 0 >$dest/tot$1.$j/sub$3.$1.$j'_size0.txt'
 done
 mkdir -p $dest/tots
 hadd $dest/tots/sub$3.$1.root $dest/tot$1.*/sub$3.$1.*.root

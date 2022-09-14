@@ -1,6 +1,7 @@
 #!/bin/bash
 
 input=~/getflow/txts/$3runall_runlist.txt
+raccount
 
 #./runall.sh no1:location no2:MCE211203.1 no3:mc18jet no4: optional, subsampling no5:optional combine m files 
 #copy and open to be edited steering macro
